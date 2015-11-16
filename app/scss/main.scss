@@ -1,0 +1,183 @@
+@import '../../node_modules/normalize.css/normalize';
+
+@mixin element($element) {
+    &__#{$element} {
+        @content;
+    }
+}
+
+@mixin modifier($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+body {
+  background: #36393E;
+}
+
+.chat {
+  height: 100vh;
+  float: left;
+  width: 100%;
+  transition: all 0.5s;
+  @include modifier(blur) {
+    filter: blur(5px);
+  }
+  @include element(aside) {
+    background: #2E3136;
+    width: 250px;
+    float: left;
+    height: 100%;
+    padding: 20px;
+  }
+  @include element(content) {
+    width: calc(100% - 250px);
+    float: left;
+    height: 100%;
+    background: #36393E;
+    position: relative;
+    padding: 80px 20px 20px 20px;
+    overflow: hidden;
+    @include element(header) {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 20px;
+      background: #36393E;
+      z-index: 1;
+      color: #FFF;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 3px solid #2E3136;
+    }
+  }
+  @include element(messages-list) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    width: 100%;
+    @include element(item) {
+      float: left;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  }
+  @include element(user) {
+    position: relative;
+    width: 100%;
+    float: left;
+    padding-left: 70px;
+    @include element(avatar) {
+      height: 50px;
+      width: 50px;
+      float: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    @include element(name) {
+      color: #FFF;
+      font-size: 16px;
+    }
+    @include element(created-at) {
+      font-size: 12px;
+      color: rgba(255,255,255,.2);
+    }
+    @include element(message) {
+      margin: 0;
+      float: left;
+      width: 100%;
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  }
+}
+
+.form {
+  padding: 20px;
+  @include modifier(message) {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 50px 25px #36393E;
+    background: #55585D;
+  }
+  @include modifier(signin) {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: auto;
+    background: #55585D;
+    border-radius: 5px;
+    box-shadow: 0 0 100px 25px rgba(0,0,0,0.50);
+  }
+  @include element(textarea) {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    float: left;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.5);
+    outline: none;
+    color: #FFF;
+  }
+  @include element(input) {
+    width: 100%;
+    padding: 10px;
+    height: 40px;
+    border-radius: 5px;
+    resize: none;
+    float: left;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.5);
+    outline: none;
+    color: #FFF;
+    @include modifier(signin) {
+      width: calc(100% - 65px);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  @include element(submit) {
+    background: #2e3136;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    padding: 13px 10px;
+    width: auto;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 65px;
+    text-align: center;
+  }
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}

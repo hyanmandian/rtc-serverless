@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Trabalho de Redes 1</title>
+    <meta name="description" content="Implementando uma conexão UDP">
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/bundle.css">
+  </head>
+  <body>
+    <main class="chat chat--blur">
+      <aside class="chat__aside">
+        <ul></ul>
+      </aside>
+      <div class="chat__content">
+        <header class="chat__content__header">Public</header>
+        <ul class="chat__messages-list js-messages-list" >
+          <li class="chat__messages-list__item">
+            <div class="chat__user">
+              <span class="chat__user__avatar" style="background-image: url('https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png'); "></span>
+              <strong class="chat__user__name">User</strong>
+              <time datetime="2008-02-14 20:00" class="chat__user__created-at">2008-02-14 20:00</time>
+              <p class="chat__user__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p>
+            </div>
+          </li>
+          <li class="chat__messages-list__item">
+            <div class="chat__user">
+              <span class="chat__user__avatar" style="background-image: url('https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png'); "></span>
+              <strong class="chat__user__name">User</strong>
+              <time datetime="2008-02-14 20:00" class="chat__user__created-at">2008-02-14 20:00</time>
+              <p class="chat__user__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p>
+            </div>
+          </li>
+          <li class="chat__messages-list__item">
+            <div class="chat__user">
+              <span class="chat__user__avatar" style="background-image: url('https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png'); "></span>
+              <strong class="chat__user__name">User</strong>
+              <time datetime="2008-02-14 20:00" class="chat__user__created-at">2008-02-14 20:00</time>
+              <p class="chat__user__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p>
+            </div>
+          </li>
+          <li class="chat__messages-list__item">
+            <div class="chat__user">
+              <span class="chat__user__avatar" style="background-image: url('https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png'); "></span>
+              <strong class="chat__user__name">User</strong>
+              <time datetime="2008-02-14 20:00" class="chat__user__created-at">2008-02-14 20:00</time>
+              <p class="chat__user__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p>
+            </div>
+          </li>
+          <li class="chat__messages-list__item">
+            <div class="chat__user">
+              <span class="chat__user__avatar" style="background-image: url('https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png'); "></span>
+              <strong class="chat__user__name">User</strong>
+              <time datetime="2008-02-14 20:00" class="chat__user__created-at">2008-02-14 20:00</time>
+              <p class="chat__user__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p>
+            </div>
+          </li>
+        </ul>
+        <form class="form form--message">
+          <textarea class="form__textarea js-form__textarea" rows="1" required placeholder="Your message..."></textarea>
+        </form>
+      </div>
+    </main>
+    <div class="modal">
+      <form class="form form--signin js-signin-form">
+          <input type="text" class="form__input form__input--signin" name="name" required placeholder="Your name...">
+          <input type="submit" class="form__submit" value="Submit">
+      </form>
+    </div>
+    <script src="js/bundle.js"></script>
+  </body>
+</html>
