@@ -37,6 +37,8 @@
     "webpack": "^1.12.2"
   },
   "dependencies": {
+    "moment": "^2.10.6",
+    "mustache": "^2.2.0",
     "normalize.css": "^3.0.3"
   }
 }

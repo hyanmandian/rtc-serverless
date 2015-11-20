@@ -1,48 +1,26 @@
 import $ from 'jquery';
 import autosize from 'autosize';
 
-class Modal {
+import Modal from './core/Modal';
+import Message from './core/Message';
+import User from './core/User';
 
-  static close() {
-    $('.modal').fadeOut()
-    $('.chat').removeClass('chat--blur')
-  }
+var user;
 
-}
-
-class User {
-
-  getName() {
-    return this.name;
-  }
-
-  setName(name) {
-    this.name = name;
-  }
-
-}
-
-class Message {
-
-  static send() {
-    $('.js-messages-list').append("<li class='chat__messages-list__item'><div class='chat__user'><span class='chat__user__avatar' style='background-image: url(https://secure.gravatar.com/avatar/b15fc8bc4959afe910b53c6fc8b6dc60.jpg?s=48&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F272a%2Fimg%2Favatars%2Fava_0026-48.png);'></span><strong class='chat__user__name'>User</strong><time datetime='2008-02-14 20:00' class='chat__user__created-at'>2008-02-14 20:00</time><p class='chat__user__message'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit accumsan dictum. Nam eu interdum metus. Donec nisl urna, semper tincidunt volutpat non, pretium quis massa. Donec ac justo nulla. Cras fringilla eget tellus sed faucibus. Maecenas leo enim, vestibulum eget dui id, scelerisque ornare augue. Phasellus pulvinar porta tortor at fermentum. Maecenas quis velit vitae tellus tincidunt scelerisque. Ut dictum magna felis, eu ultricies ante feugiat in. Vestibulum fermentum elit vehicula ante varius hendrerit. Sed hendrerit pellentesque nisi sed convallis.</p></div></li>");
-  }
-
-}
-
-const user = new User;
+const contentFormTextarea = $('.js-form__textarea');
 
 $('.js-signin-form').submit(function(event) {
 
   event.preventDefault();
 
-  user.setName = $(this).find('[name="name"]').val();
+  user = new User($(this).find('[name="name"]').val());
 
   Modal.close();
 
+  contentFormTextarea.focus();
+
 })
 
-const contentFormTextarea = $('.js-form__textarea');
 
 autosize(contentFormTextarea);
 
@@ -62,7 +40,9 @@ contentFormTextarea.keydown(function (e) {
 
   if (e.keyCode === 13 && !e.ctrlKey) {
 
-    Message.send($(this).val());
+    let message = new Message(user, $(this).val());
+
+    message.send();
 
     $(this).val('');
 
