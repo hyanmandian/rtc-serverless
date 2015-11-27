@@ -24,6 +24,7 @@ export default class Message {
     var messageTemplate = Mustache.render(messageTemplate, data);
 
     $('.js-messages-list').append(messageTemplate);
+
   }
 
 }

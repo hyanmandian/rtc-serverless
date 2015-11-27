@@ -30,15 +30,19 @@
     "gulp-watch": "^1.0.7",
     "gulp-webpack": "^0.4.1",
     "hammerjs": "^2.0.4",
-    "jquery": "^2.1.4",
     "lodash.assign": "^3.2.0",
-    "materialize-css": "^0.97.3",
     "merge": "^1.2.0",
     "webpack": "^1.12.2"
   },
   "dependencies": {
+    "datachannel": "^1.0.0",
+    "firebase": "^2.3.2",
+    "jquery": "^2.1.4",
     "moment": "^2.10.6",
     "mustache": "^2.2.0",
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
+    "peerjs": "^0.3.14",
+    "rtcmulticonnection": "^2.2.5",
+    "rtcmulticonnection-v3": "^3.2.1"
   }
 }
