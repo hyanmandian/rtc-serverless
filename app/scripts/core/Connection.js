@@ -18,21 +18,15 @@ export default class Connection {
 	  	video: false,
 		};
 
-		this.connection.onmessage = function(e) {
+		this.connection.autoCloseEntireSession = true;
+
+		this.connection.onmessage = (e) => {
 			(new Message(e.data.user, e.data.message)).append();
 		}
 
-		var self = this;
-
-		this.connection.onopen = function(e) {
-			self.stopLoading();
+		this.connection.onopen = (e) => {
+			this.stopLoading();
 		}
-
-		this.connection.onleave = function(e) {
-			if(e.entireSessionClosed) {
-				self.connect(self.channel);
-			}
-		} 
 
 		this.connect('general');
 
@@ -60,18 +54,13 @@ export default class Connection {
 
 		var firebaseChannel = this.connectFirebase(channel);
 		var firebaseUser = this.connectFirebase(channel + '/users');
-		var self = this;
 
-		firebaseChannel.once('value', function (data) {
-		  if (data.val() == null) {
-		    self.open(channel);
-		  } else {
-		    self.join(channel);
-		  }
+		firebaseChannel.once('value', (data) => {
+		  (data.val() == null) ? this.open(channel) : this.join(channel);
 
     	var ref = firebaseUser.push();
-    	ref.set(self.user);
-    	ref.onDisconnect().remove();
+    			ref.set(this.user);
+    			ref.onDisconnect().remove();
 		});
 
   }
@@ -80,10 +69,10 @@ export default class Connection {
   	try {
 	  	this.connection.open(channel);
 
-	  	var self = this;
 	  	var firebaseChannel = this.connectFirebase(channel);
 	  			firebaseChannel.set(channel);
-	    		firebaseChannel.onDisconnect().remove();
+	    		firebaseChannel.onDisconnect()
+	    									 .remove();
   	} catch(e) {
   		this.connect(channel);	
   	}
@@ -92,6 +81,13 @@ export default class Connection {
   join(channel) {	
   	try {
   		this.connection.join(channel);
+
+  		var firebaseChannel = this.connectFirebase(channel);
+
+  		firebaseChannel.on('child_removed', (data) => {
+				this.connect(channel);
+			});
+
   	} catch(e) {
 			this.connect(channel);  		
   	}
