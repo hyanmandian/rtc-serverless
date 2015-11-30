@@ -9,7 +9,12 @@ export default class Message {
     this.message = message;
   }
 
-  send() {
+  nl2br (str) {
+    var breakTag = '</br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+  }
+
+  append() {
 
     var messageTemplate = $('#messages-list__item').html();
 
@@ -17,7 +22,7 @@ export default class Message {
 
     var data = {
       user: this.user,
-      message: this.message,
+      message: this.nl2br(this.message),
       created_at: moment().format('H:mm:ss'),
     };
 

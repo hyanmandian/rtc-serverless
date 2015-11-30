@@ -22,6 +22,22 @@
 
 body {
   background: #36393E;
+  &:before {
+    content: '';
+    opacity: 0;
+    transition: all 0.5s;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    font-size: 50px;
+    color: #FFF;
+  }
+  &.loading:before {
+    content: 'Loading...';
+    opacity: 1;
+  }
 }
 
 .chat {
