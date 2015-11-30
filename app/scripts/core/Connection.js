@@ -18,8 +18,6 @@ export default class Connection {
 	  	video: false,
 		};
 
-		this.connection.autoCloseEntireSession = true;
-
 		this.connection.onmessage = (e) => {
 			(new Message(e.data.user, e.data.message)).append();
 		}
@@ -47,9 +45,8 @@ export default class Connection {
   }
 
   connect(channel) {
-		
-		this.startLoading();
 
+		this.startLoading();
 		this.channel = channel;
 
 		var firebaseChannel = this.connectFirebase(channel);
@@ -57,6 +54,8 @@ export default class Connection {
 
 		firebaseChannel.once('value', (data) => {
 		  (data.val() == null) ? this.open(channel) : this.join(channel);
+
+      console.log(data.val());
 
     	var ref = firebaseUser.push();
     			ref.set(this.user);
@@ -74,22 +73,22 @@ export default class Connection {
 	    		firebaseChannel.onDisconnect()
 	    									 .remove();
   	} catch(e) {
-  		this.connect(channel);	
+  		this.connect(channel);
   	}
   }
 
-  join(channel) {	
+  join(channel) {
   	try {
   		this.connection.join(channel);
 
-  		var firebaseChannel = this.connectFirebase(channel);
-
-  		firebaseChannel.on('child_removed', (data) => {
-				this.connect(channel);
-			});
-
+      var firebaseChannel = this.connectFirebase(channel);
+          firebaseChannel.once('child_removed', () => {
+            setTimeout(() => {
+              this.connect(channel);
+            }, Math.floor(Math.random()*(1000-0+1)+0));
+          });
   	} catch(e) {
-			this.connect(channel);  		
+			this.connect(channel);
   	}
   }
 
