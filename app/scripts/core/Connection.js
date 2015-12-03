@@ -52,26 +52,47 @@ export default class Connection {
 		var firebaseChannel = this.connectFirebase(channel);
 		var firebaseUser = this.connectFirebase(channel + '/users');
 
+    if(this.currentChannel && this.currentChannel !== channel) {
+      this.ref.remove();
+      this.connection.leave();
+    }
+
 		firebaseChannel.once('value', (data) => {
 		  (data.val() == null) ? this.open(channel) : this.join(channel);
 
+    	var ref = firebaseUser.push();
+    	this.ref = ref;
+
+  		ref.set(this.user);
+			ref.onDisconnect().remove();
+
+      this.currentChannel = channel;
+    });
+
+  }
+
+  onChannels(callbackChannels) {
+    var firebase = this.connectFirebase('');
+
+    firebase.on('value', (data) => {
+      if(data.val() == null) return;
+
       console.log(data.val());
 
-    	var ref = firebaseUser.push();
-    			ref.set(this.user);
-    			ref.onDisconnect().remove();
-		});
+      callbackChannels(data.val());
+    });
 
   }
 
   open(channel) {
-  	try {
-	  	this.connection.open(channel);
+    try {
+      this.connection.open(channel);
 
-	  	var firebaseChannel = this.connectFirebase(channel);
-	  			firebaseChannel.set(channel);
-	    		firebaseChannel.onDisconnect()
-	    									 .remove();
+      var firebaseChannel = this.connectFirebase(channel);
+          firebaseChannel.set(channel);
+          firebaseChannel.onDisconnect()
+                         .remove();
+
   	} catch(e) {
   		this.connect(channel);
   	}
@@ -87,6 +108,7 @@ export default class Connection {
               this.connect(channel);
             }, Math.floor(Math.random()*(1000-0+1)+0));
           });
+      this.currentChannel = channel;
   	} catch(e) {
 			this.connect(channel);
   	}

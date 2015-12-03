@@ -14,7 +14,21 @@
   <body>
     <main class="chat chat--blur">
       <aside class="chat__aside">
-        <ul></ul>
+        <button class="js-channel-modal">+ Channel</button>
+        <ul class="js-channels-list">
+          <script id="channels-list__item" type="x-tmpl-mustache">
+            {{#channels}}
+              <li class="channels-list__item js-join-channel" data-channel="{{ name }}">
+                {{ name }} <span>{{ users.length }}</span>
+                <ul class="channels-list__item__users">
+                  {{#users}}
+                    <li class="channels-list__item" data-id="{{ id }}">{{ name }}</li>
+                  {{/users}}
+                </ul>
+              </li>
+            {{/channels}}
+          </script>
+        </ul>
       </aside>
       <div class="chat__content">
         <header class="chat__header">Public</header>
@@ -34,9 +48,15 @@
         </form>
       </div>
     </main>
-    <div class="modal">
+    <div class="modal" id="signin-modal">
       <form class="form form--signin js-signin-form">
           <input type="text" autofocus class="form__input form__input--signin" name="name" required placeholder="Your name...">
+          <input type="submit" class="form__submit" value="Submit">
+      </form>
+    </div>
+    <div class="modal" id="channel-modal">
+      <form class="form form--signin js-channel-form">
+          <input type="text" autofocus class="form__input form__input--signin" name="name" required placeholder="Channel name...">
           <input type="submit" class="form__submit" value="Submit">
       </form>
     </div>

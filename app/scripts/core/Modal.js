@@ -2,8 +2,12 @@ import $ from 'jquery';
 
 export default new class Modal {
 
-  close() {
-    $('.modal').fadeOut();
+  open(modal) {
+    $('#' + modal).fadeIn();
+  }
+
+  close(modal) {
+    $('#' + modal).fadeOut();
   }
 
 }
