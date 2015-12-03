@@ -15,18 +15,20 @@
     <main class="chat chat--blur">
       <aside class="chat__aside">
         <button class="js-channel-modal">+ Channel</button>
-        <ul class="js-channels-list">
+          <div class="js-channels-list"></div>
           <script id="channels-list__item" type="x-tmpl-mustache">
-            {{#channels}}
-              <li class="channels-list__item js-join-channel" data-channel="{{ name }}">
-                {{ name }} <span>{{ users.length }}</span>
-                <ul class="channels-list__item__users">
-                  {{#users}}
-                    <li class="channels-list__item" data-id="{{ id }}">{{ name }}</li>
-                  {{/users}}
-                </ul>
-              </li>
-            {{/channels}}
+            <ul>
+              {{#channels}}
+                <li class="channels-list__item js-join-channel" data-channel="{{ name }}">
+                  {{ name }} <span>{{ users.length }}</span>
+                  <ul class="channels-list__item__users">
+                    {{#users}}
+                      <li class="channels-list__item" data-id="{{ id }}">{{ name }}</li>
+                    {{/users}}
+                  </ul>
+                </li>
+              {{/channels}}
+            </ul>
           </script>
         </ul>
       </aside>

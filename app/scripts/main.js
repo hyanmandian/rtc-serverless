@@ -26,10 +26,10 @@ $('.js-signin-form').submit(function(event) {
   contentFormTextarea.focus();
 
   connection.onChannels((channels) => {
+
     var messageTemplate = $('#channels-list__item').html();
 
     var channels = Object.keys(channels).map((value, index) => {
-      if(value == $('[data-channel]').data('channel')) return ;
 
       var users = Object.keys(channels[value]['users']).map((e, index) => {
         return {
@@ -44,11 +44,13 @@ $('.js-signin-form').submit(function(event) {
       }
     });
 
+    console.log(channels);
+
     var messageTemplate = Mustache.render(messageTemplate, {
-      channels: channels
+      channels: channels,
     });
 
-    $('.js-channels-list').append(messageTemplate);
+    $('.js-channels-list').html(messageTemplate);
   });
 
 });

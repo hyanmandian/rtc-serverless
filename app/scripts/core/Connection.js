@@ -77,8 +77,6 @@ export default class Connection {
     firebase.on('value', (data) => {
       if(data.val() == null) return;
 
-      console.log(data.val());
-
       callbackChannels(data.val());
     });
 
